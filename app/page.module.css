@@ -1,0 +1,416 @@
+.page {
+  --background: #164c86;
+  --foreground: #fff;
+
+  --text-primary: #000;
+  --text-secondary: #666;
+
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+  --button-secondary-border: #ebebeb;
+
+  display: flex;
+  min-height: 100vh;
+  font-family: var(--font-geist-sans);
+  background-color: var(--background);
+}
+
+.main {
+
+
+  border-style: solid;
+  border-radius: 0px;
+  border-color: rgba(255, 255, 255, 0.2);
+
+
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #000;
+  padding: 10px 30px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.logo {
+  margin-right: 30px;
+  width: 350px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.resetButton {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.resetButton:hover {
+  background-color: red;
+  opacity: 60%;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 24px;
+}
+
+.intro h1 {
+  max-width: 320px;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: -2.4px;
+  text-wrap: balance;
+  color: var(--text-primary);
+}
+
+.intro p {
+  max-width: 440px;
+  font-size: 18px;
+  line-height: 32px;
+  text-wrap: balance;
+  color: var(--text-secondary);
+}
+
+.intro a {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.ctas {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 440px;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.ctas a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 128px;
+  border: 1px solid transparent;
+  transition: 0.2s;
+  cursor: pointer;
+  width: fit-content;
+  font-weight: 500;
+}
+
+a.primary {
+  background: var(--text-primary);
+  color: var(--background);
+  gap: 8px;
+}
+
+a.secondary {
+  border-color: var(--button-secondary-border);
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  a.primary:hover {
+    background: var(--button-primary-hover);
+    border-color: transparent;
+  }
+
+  a.secondary:hover {
+    background: var(--button-secondary-hover);
+    border-color: transparent;
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 48px 24px;
+  }
+
+  .intro {
+    gap: 16px;
+  }
+
+  .intro h1 {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -1.92px;
+  }
+}
+
+/* Quick Actions Section */
+.quickActions h2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  font-family: var(--font-bebas-neue);
+  letter-spacing: 1px;
+}
+
+/* 3x3 Grid for buttons */
+.actionCards {
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.actionCards button {
+  padding: 20px;
+  font-size: 32px;
+  font-weight: 400;
+  border: 3px solid #1a1a1a;
+  border-radius: 8px;
+  background: #229954;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  min-height: 90px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-bebas-neue);
+  letter-spacing: 1px;
+}
+
+.actionCards button span {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.actionCards button:hover {
+  opacity: 0.5;
+}
+
+/* Notes Section */
+.notes {
+  margin-top: 24px;
+}
+
+.notes label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.notes textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--button-secondary-border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 16px;
+  resize: vertical;
+  min-height: 60px;
+  box-sizing: border-box;
+}
+
+.saveNoteButton {
+  margin-top: 12px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  width: 100%;
+}
+
+.saveNoteButton:hover {
+  background: #333;
+}
+
+/* Progress Section */
+.progressSection {
+  margin-top: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #000000 0%, #2db560 50%, #000000 100%);
+  border-radius: 12px;
+  color: white;
+}
+
+.progressSection h3 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  font-family: var(--font-bebas-neue);
+  letter-spacing: 1px;
+}
+
+.progressStats {
+  margin-bottom: 12px;
+}
+
+.currentPoints {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.totalPoints {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progressFill {
+  height: 100%;
+  background: white;
+  width: 0%;
+  transition: width 0.3s;
+}
+
+.pointsRemaining {
+  font-size: 14px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --background: #000;
+    --foreground: #000;
+
+    --text-primary: #ededed;
+    --text-secondary: #999;
+
+    --button-primary-hover: #ccc;
+    --button-secondary-hover: #1a1a1a;
+    --button-secondary-border: #1a1a1a;
+
+
+
+  }
+
+  .notes textarea {
+    background: #1a1a1a;
+    color: var(--text-primary);
+    border-color: var(--button-secondary-border);
+  }
+}
+
+
+.liveTracker {
+  width: 100%;
+  max-width: 90%;
+  margin-top: 15px;
+
+
+}
+
+.liveTracker h1 {
+
+  font-size: 42px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+  font-family: var(--font-bebas-neue);
+  letter-spacing: 2px;
+}
+
+
+.quickActions {
+  width: 100%;
+}
+
+.dailyMet {
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  font-size: 48px;
+}
+
+.leaderBoardContainer {
+  margin-top: 25px;
+  width: 100%;
+  max-width: 90%;
+}
+
+.leaderBoardContainer h4 {
+  font-family: var(--font-bebas-neue);
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  text-align: left;
+  color: var(--text-primary);
+}
+
+.leaderNames {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.leaderNames p {
+  font-family: var(--font-bebas-neue);
+  flex: 1;
+  text-align: center;
+  font-size: 32px;
+  padding: 30px 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: var(--text-primary);
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clearBtn {
+  width: 100%;
+  max-width: 90%;
+}
+
+.actionsHeaderSpace {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
