@@ -61,7 +61,7 @@
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-button {
+.submitButton {
   width: 100%;
   padding: 14px 24px;
   font-size: 18px;
@@ -74,11 +74,11 @@ button {
   transition: 0.2s;
 }
 
-button:hover:not(:disabled) {
+.submitButton:hover:not(:disabled) {
   opacity: 0.8;
 }
 
-button:disabled {
+.submitButton:disabled {
   background: #666;
   cursor: not-allowed;
 }

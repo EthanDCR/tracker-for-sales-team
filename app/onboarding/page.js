@@ -54,7 +54,7 @@ export default function Onboarding() {
             </select>
           </div>
 
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} className={styles.submitButton}>
             {loading ? "Setting up..." : "Complete Setup"}
           </button>
         </form>
