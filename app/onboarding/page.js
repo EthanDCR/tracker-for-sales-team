@@ -31,10 +31,10 @@ export default function Onboarding() {
   };
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <div className={styles.card}>
-        <h1>Welcome to Sales Tracker!</h1>
-        <p>Let's get you set up. Please select your office location:</p>
+        <h1>Welcome to your Sales Tracker!</h1>
+        <p>Let's get you set up with your account:</p>
 
         <form onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
@@ -59,6 +59,6 @@ export default function Onboarding() {
           </button>
         </form>
       </div>
-    </div>
+    </main>
   );
 }

@@ -20,7 +20,23 @@ export default function Home() {
   const [showKnockForm, setShowKnockForm] = useState(false);
   const [showPresentationForm, setShowPresentationForm] = useState(false);
   const [leaders, setLeaders] = useState([]);
+  const [checkingUser, setCheckingUser] = useState(true);
 
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const response = await fetch('/api/check-user');
+      const { exists } = await response.json();
+
+      if (!exists) {
+        window.location.href = '/onboarding';
+      } else {
+        setCheckingUser(false);
+      }
+    };
+
+    checkUser();
+  }, []);
 
 
   const capitalize = (str) => {
@@ -94,6 +110,10 @@ export default function Home() {
     }
   }, [points]);
 
+
+  if (checkingUser) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'white', backgroundColor: '#000' }}>Loading...</div>;
+  }
 
   return (
     <>
