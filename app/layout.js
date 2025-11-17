@@ -29,9 +29,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable}`}>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable}`}>
+        <ClerkProvider>
           <div className="layoutstyles">
             <div className="sidebar">
               <Image
@@ -58,8 +58,8 @@ export default function RootLayout({ children }) {
             </div>
             {children}
           </div>
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

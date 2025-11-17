@@ -21,11 +21,12 @@ export default function Onboarding() {
     setLoading(true);
 
     try {
-      await createUser(office);
+      const result = await createUser(office);
+      console.log("User created:", result);
       router.push("/");
     } catch (error) {
       console.error("Error creating user:", error);
-      alert("Error setting up your account. Please try again.");
+      alert(`Error setting up your account: ${error.message}. Please try again.`);
       setLoading(false);
     }
   };
