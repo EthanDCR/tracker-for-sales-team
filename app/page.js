@@ -118,7 +118,7 @@ export default function Home() {
   return (
     <>
       {showConfetti && <Confetti />}
-      {showCallForm && <CallForm onClose={() => setShowCallForm(false)} onSubmit={() => handleAction(5)} />}
+      {showCallForm && <CallForm onClose={() => setShowCallForm(false)} onSubmit={() => handleAction(1)} />}
       {showKnockForm && <KnockForm onClose={() => setShowKnockForm(false)} onSubmit={() => handleAction(1)} />}
       {showPresentationForm && <PresentationForm onClose={() => setShowPresentationForm(false)} onSubmit={() => handleAction(20)} />}
       <main className={styles.main}>
@@ -135,7 +135,7 @@ export default function Home() {
           <div id="quick-actions" className={styles.quickActions}>
             <div id="action-cards" className={styles.actionCards}>
               <button onClick={() => handleAction(20)}>Lead<br /><span>+20 pts</span></button>
-              <button onClick={() => setShowCallForm(true)}>Call<br /><span>+5 pts</span></button>
+              <button onClick={() => setShowCallForm(true)}>Call<br /><span>+1 pt</span></button>
               <button onClick={() => setShowKnockForm(true)}>Knock<br /><span>+1 pts</span></button>
               <button onClick={() => handleAction(10)}>Inspection<br /><span>+10 pts</span></button>
               <button onClick={() => setShowPresentationForm(true)}>Presentation<br /><span>+20 pts</span></button>

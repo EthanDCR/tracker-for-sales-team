@@ -15,7 +15,7 @@ export default function CallForm({ onClose }) {
   }
 
   const handleFinalSubmit = (selected, notes) => {
-    addActivity(5, notes, selected);
+    addActivity(1, notes, selected);
     onClose();
   }
 
