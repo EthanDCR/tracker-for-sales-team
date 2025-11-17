@@ -44,8 +44,8 @@ export default function RootLayout({ children }) {
               />
               <Link href="/">Live tracker</Link>
               <Link href="/leaderboard">LeaderBoard</Link>
-              <Link href="/stats">My stats</Link>
-              <Link href="/account">Account</Link>
+              <span className="disabled-link">My stats ✕</span>
+              <span className="disabled-link">Account ✕</span>
 
               <div style={{ marginTop: 'auto' }}>
                 <SignedOut>

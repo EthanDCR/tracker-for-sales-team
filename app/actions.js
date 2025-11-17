@@ -73,38 +73,43 @@ export async function addActivity(value, notes = "", result = null) {
 
 //create user in database after onboarding
 export async function createUser(office) {
-  const { userId } = await auth();
-  const user = await currentUser();
+  try {
+    const { userId } = await auth();
+    const user = await currentUser();
 
-  if (!userId || !user) {
-    throw new Error("Unauthorized");
-  }
+    if (!userId || !user) {
+      throw new Error("Unauthorized");
+    }
 
-  // Get user's name from Clerk
-  const name = user.firstName || user.emailAddresses[0].emailAddress.split('@')[0];
-  const email = user.emailAddresses[0].emailAddress;
+    // Get user's name from Clerk
+    const name = user.firstName || user.emailAddresses[0].emailAddress.split('@')[0];
+    const email = user.emailAddresses[0].emailAddress;
 
-  // Check if user already exists
-  const existingUser = await db().execute({
-    sql: 'SELECT id FROM users WHERE id = ?',
-    args: [userId],
-  });
-
-  if (existingUser.rows.length > 0) {
-    // Update existing user
-    await db().execute({
-      sql: 'UPDATE users SET name = ?, email = ?, office = ? WHERE id = ?',
-      args: [name, email, office, userId],
+    // Check if user already exists
+    const existingUser = await db().execute({
+      sql: 'SELECT id FROM users WHERE id = ?',
+      args: [userId],
     });
-  } else {
-    // Create new user
-    await db().execute({
-      sql: 'INSERT INTO users (id, name, email, office, created_at) VALUES (?, ?, ?, ?, ?)',
-      args: [userId, name, email, office, new Date().toISOString()],
-    });
-  }
 
-  return { success: true };
+    if (existingUser.rows.length > 0) {
+      // Update existing user
+      await db().execute({
+        sql: 'UPDATE users SET name = ?, email = ?, office = ? WHERE id = ?',
+        args: [name, email, office, userId],
+      });
+    } else {
+      // Create new user
+      await db().execute({
+        sql: 'INSERT INTO users (id, name, email, office, created_at) VALUES (?, ?, ?, ?, ?)',
+        args: [userId, name, email, office, new Date().toISOString()],
+      });
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error in createUser:', error);
+    throw new Error(error.message || 'Failed to create user');
+  }
 }
 
 //check if user exists in database

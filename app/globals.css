@@ -87,3 +87,22 @@ a {
 .sidebar a:hover {
   background-color: #333;
 }
+
+.disabled-link {
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  font-size: 24px;
+  padding: 8px;
+  border-radius: 5px;
+  font-family: var(--font-bebas-neue);
+  letter-spacing: 1px;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.disabled-link:hover {
+  background-color: #1a1a1a;
+  opacity: 0.7;
+}
