@@ -69,6 +69,18 @@
   background: #229954 !important;
 }
 
+.followUp {
+  background: #3498db !important;
+}
+
+.presentation {
+  background: #e67e22 !important;
+}
+
+.closedDeal {
+  background: #229954 !important;
+}
+
 .actionButtons {
   display: flex;
   gap: 12px;

@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
+import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 
 
@@ -28,31 +29,37 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable}`}>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable}`}>
+          <div className="layoutstyles">
+            <div className="sidebar">
+              <Image
+                src="/rm-web-logo.png"
+                alt="Logo"
+                width={200}
+                height={67}
+                className="sidebar-logo"
+                priority
+              />
+              <Link href="/">Live tracker</Link>
+              <Link href="/leaderboard">LeaderBoard</Link>
+              <Link href="/stats">My stats</Link>
+              <Link href="/account">Account</Link>
 
-
-
-
-        <div className="layoutstyles">
-
-          <div className="sidebar">
-            <Image
-              src="/rm-web-logo.png"
-              alt="Logo"
-              width={200}
-              height={67}
-              className="sidebar-logo"
-              priority
-            />
-            <Link href="/">Live tracker</Link>
-            <Link href="/leaderboard">LeaderBoard</Link>
-            <Link href="/stats">My stats</Link>
-            <Link href="/account">Account</Link>
+              <div style={{ marginTop: 'auto' }}>
+                <SignedOut>
+                  <SignInButton mode="modal" />
+                </SignedOut>
+                <SignedIn>
+                  <UserButton />
+                </SignedIn>
+              </div>
+            </div>
+            {children}
           </div>
-          {children}
-        </div>
-      </body>
-    </html >
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

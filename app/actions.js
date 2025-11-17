@@ -1,10 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
-
-//test before auth and user id setup
-const userId = "test-user-1";
-const timeStamp = new Date().toISOString();
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 //get top 3 for leaderboard
 export async function getTopThreeToday() {
@@ -25,8 +22,14 @@ export async function getTopThreeToday() {
 
 //results user inputs after clicking call action
 export async function logCallResult(result, notes = "") {
-  console.log(`final value is ${result}`);
+  const { userId } = await auth();
 
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
+
+  const timeStamp = new Date().toISOString();
+  console.log(`final value is ${result}`);
 
   await db().execute({
     sql: 'INSERT INTO call_records (user_id, result, timestamp, notes) VALUES (?, ?, ?, ?)',
@@ -37,6 +40,14 @@ export async function logCallResult(result, notes = "") {
 
 
 export async function addActivity(value, notes = "", result = null) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
+
+  const timeStamp = new Date().toISOString();
+
   let activity;
   switch (value) {
     case 20: activity = "lead";
@@ -56,8 +67,60 @@ export async function addActivity(value, notes = "", result = null) {
 
   await db().execute({
     sql: 'INSERT INTO activities (user_id, activity_type, points, notes, created_at, result) VALUES (?, ?, ?, ?, ?, ?)',
-    args: [1, activity, value, notes, timeStamp, result],
+    args: [userId, activity, value, notes, timeStamp, result],
   })
+}
+
+//create user in database after onboarding
+export async function createUser(office) {
+  const { userId } = await auth();
+  const user = await currentUser();
+
+  if (!userId || !user) {
+    throw new Error("Unauthorized");
+  }
+
+  // Get user's name from Clerk
+  const name = user.firstName || user.emailAddresses[0].emailAddress.split('@')[0];
+  const email = user.emailAddresses[0].emailAddress;
+
+  // Check if user already exists
+  const existingUser = await db().execute({
+    sql: 'SELECT id FROM users WHERE id = ?',
+    args: [userId],
+  });
+
+  if (existingUser.rows.length > 0) {
+    // Update existing user
+    await db().execute({
+      sql: 'UPDATE users SET name = ?, email = ?, office = ? WHERE id = ?',
+      args: [name, email, office, userId],
+    });
+  } else {
+    // Create new user
+    await db().execute({
+      sql: 'INSERT INTO users (id, name, email, office, created_at) VALUES (?, ?, ?, ?, ?)',
+      args: [userId, name, email, office, new Date().toISOString()],
+    });
+  }
+
+  return { success: true };
+}
+
+//check if user exists in database
+export async function checkUserExists() {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return false;
+  }
+
+  const result = await db().execute({
+    sql: 'SELECT id FROM users WHERE id = ?',
+    args: [userId],
+  });
+
+  return result.rows.length > 0;
 }
 
 //get leaderboard rankings
