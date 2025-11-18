@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
-import { getTopThreeToday } from "./actions";
+import { getTopThreeToday, checkUserExists } from "./actions";
 import CallForm from "./components/CallForm";
 import KnockForm from "./components/KnockForm";
 import PresentationForm from "./components/PresentationForm";
@@ -25,8 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const response = await fetch('/api/check-user');
-      const { exists } = await response.json();
+      const exists = await checkUserExists();
 
       if (!exists) {
         window.location.href = '/onboarding';
