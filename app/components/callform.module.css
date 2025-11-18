@@ -91,9 +91,9 @@
   padding: 16px 24px;
   font-size: 18px;
   font-weight: 600;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  background: #333 !important;
+  background: #1a1a1a !important;
   color: white;
   cursor: pointer;
   transition: 0.2s;
