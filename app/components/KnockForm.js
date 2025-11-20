@@ -13,8 +13,15 @@ export default function KnockForm({ onClose, onSubmit }) {
     setSelected(value);
   }
 
-  const handleFinalSubmit = (selected, notes) => {
-    addActivity(1, notes, selected);
+  const handleFinalSubmit = async (selected, notes) => {
+    // Log the knock activity
+    await addActivity("knock", 1, notes, selected);
+
+    // If lead was set, also log a lead activity
+    if (selected === "leadset") {
+      await addActivity("lead", 20, notes, "knock");
+    }
+
     onSubmit();
     onClose();
   }

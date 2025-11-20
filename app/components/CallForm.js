@@ -14,8 +14,15 @@ export default function CallForm({ onClose }) {
     setSelected(value);
   }
 
-  const handleFinalSubmit = (selected, notes) => {
-    addActivity(1, notes, selected);
+  const handleFinalSubmit = async (selected, notes) => {
+    // Log the call activity
+    await addActivity("call", 1, notes, selected);
+
+    // If lead was set, also log a lead activity
+    if (selected === "leadset") {
+      await addActivity("lead", 20, notes, "call");
+    }
+
     onClose();
   }
 

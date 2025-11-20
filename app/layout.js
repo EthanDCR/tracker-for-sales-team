@@ -28,6 +28,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable}`}>
@@ -44,7 +46,7 @@ export default function RootLayout({ children }) {
               />
               <Link href="/">Live tracker</Link>
               <Link href="/leaderboard">LeaderBoard</Link>
-              <span className="disabled-link">My stats ✕</span>
+              <Link href="/stats">My stats</Link>
               <span className="disabled-link">Account ✕</span>
 
               <div style={{ marginTop: 'auto' }}>

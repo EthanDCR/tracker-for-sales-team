@@ -13,8 +13,15 @@ export default function PresentationForm({ onClose, onSubmit }) {
     setSelected(value);
   }
 
-  const handleFinalSubmit = (selected, notes) => {
-    addActivity(20, notes, selected);
+  const handleFinalSubmit = async (selected, notes) => {
+    // Log the presentation activity
+    await addActivity("presentation", 20, notes, selected);
+
+    // If deal was closed, also log a close activity
+    if (selected === "closeddeal") {
+      await addActivity("close", 50, notes, "presentation");
+    }
+
     onSubmit();
     onClose();
   }

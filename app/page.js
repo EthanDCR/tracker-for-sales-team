@@ -21,6 +21,8 @@ export default function Home() {
   const [showPresentationForm, setShowPresentationForm] = useState(false);
   const [leaders, setLeaders] = useState([]);
   const [checkingUser, setCheckingUser] = useState(true);
+  const [showResetButton, setShowResetButton] = useState(false);
+
 
 
   useEffect(() => {
@@ -75,22 +77,20 @@ export default function Home() {
     }
   }, []);
 
-  const handleAction = (value) => {
+  const handleAction = (activityType, pointValue) => {
 
     if (points >= 100) {
       return
     }
 
     try {
-      if (value !== 5) {
-        addActivity(value);
-      }
+      addActivity(activityType, pointValue);
     }
     catch (error) {
       console.error(error);
     }
 
-    const newPoints = (points + value);
+    const newPoints = (points + pointValue);
     setPoints(newPoints);
     localStorage.setItem('points', newPoints);
   }
@@ -117,9 +117,9 @@ export default function Home() {
   return (
     <>
       {showConfetti && <Confetti />}
-      {showCallForm && <CallForm onClose={() => setShowCallForm(false)} onSubmit={() => handleAction(1)} />}
-      {showKnockForm && <KnockForm onClose={() => setShowKnockForm(false)} onSubmit={() => handleAction(1)} />}
-      {showPresentationForm && <PresentationForm onClose={() => setShowPresentationForm(false)} onSubmit={() => handleAction(20)} />}
+      {showCallForm && <CallForm onClose={() => setShowCallForm(false)} onSubmit={() => handleAction("call", 1)} />}
+      {showKnockForm && <KnockForm onClose={() => setShowKnockForm(false)} onSubmit={() => handleAction("knock", 1)} />}
+      {showPresentationForm && <PresentationForm onClose={() => setShowPresentationForm(false)} onSubmit={() => handleAction("presentation", 20)} />}
       <main className={styles.main}>
 
 
@@ -133,12 +133,12 @@ export default function Home() {
 
           <div id="quick-actions" className={styles.quickActions}>
             <div id="action-cards" className={styles.actionCards}>
-              <button onClick={() => handleAction(20)}>Lead<br /><span>+20 pts</span></button>
+              <button onClick={() => handleAction("lead", 20)}>Lead<br /><span>+20 pts</span></button>
               <button onClick={() => setShowCallForm(true)}>Call<br /><span>+1 pt</span></button>
               <button onClick={() => setShowKnockForm(true)}>Knock<br /><span>+1 pts</span></button>
-              <button onClick={() => handleAction(10)}>Inspection<br /><span>+10 pts</span></button>
+              <button onClick={() => handleAction("inspection", 10)}>Inspection<br /><span>+10 pts</span></button>
               <button onClick={() => setShowPresentationForm(true)}>Presentation<br /><span>+20 pts</span></button>
-              <button onClick={() => handleAction(50)}>Closed Deal<br /><span>+50 pts</span></button>
+              <button onClick={() => handleAction("close", 50)}>Closed Deal<br /><span>+50 pts</span></button>
             </div>
 
           </div>
@@ -172,7 +172,9 @@ export default function Home() {
         </div>
 
         <div className={styles.clearBtn}>
-          <button onClick={() => handleReset()} className={styles.resetButton}>Reset Points</button>
+          {showResetButton &&
+            <button onClick={() => handleReset()} className={styles.resetButton}>Reset Points</button>
+          }
         </div>
 
       </main >

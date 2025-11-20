@@ -1,0 +1,175 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #000;
+  padding: 20px 30px;
+  position: relative;
+  overflow-y: auto;
+  color: white;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: var(--font-bebas-neue);
+  letter-spacing: 2px;
+  color: white;
+}
+
+.periodSelector {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.periodSelector button {
+  padding: 10px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: var(--font-bebas-neue);
+  letter-spacing: 1px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.periodSelector button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.periodSelector button.active {
+  background: #229954;
+  border-color: #229954;
+  color: white;
+}
+
+.chartsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: none;
+  margin-bottom: 20px;
+}
+
+.chartCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.chartCard h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: 400;
+  text-align: center;
+  font-family: var(--font-bebas-neue);
+  letter-spacing: 1px;
+  color: white;
+}
+
+.noData {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 60px 20px;
+  font-size: 18px;
+}
+
+.tooltip {
+  background: rgba(0, 0, 0, 0.95);
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.tooltip p {
+  margin: 4px 0;
+  color: white;
+  font-size: 14px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+  background: rgba(34, 153, 84, 0.1);
+  border: 1px solid rgba(34, 153, 84, 0.3);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  min-height: 80px;
+}
+
+.statItem:hover {
+  transform: translateY(-2px);
+  background: rgba(34, 153, 84, 0.2);
+  border-color: rgba(34, 153, 84, 0.5);
+}
+
+.statLabel {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-bebas-neue);
+}
+
+.statValue {
+  font-size: 32px;
+  font-weight: 400;
+  color: #229954;
+  font-family: var(--font-bebas-neue);
+  line-height: 1;
+}
+
+@media (max-width: 1024px) {
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .periodSelector {
+    flex-wrap: wrap;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .chartCard h2 {
+    font-size: 24px;
+  }
+}
